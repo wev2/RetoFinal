@@ -101,17 +101,16 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
         
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent e, LoginControlador cont) {
 		// TODO Auto-generated method stub
 		if (e.getSource()==btnCheck) {
 			 if (cont.comprobarUsuario(new Usuario (campoUsuario.getText(),new String(campoContrasena.getPassword())))) {
-				 lblNewLabel_1.setText("Usuario Logeado");
+				 lblNewLabel_1.setText("User found");
 				 VentanaElegir ve=new  VentanaElegir(this, cont);
 				 ve.setVisible(true);
 				 dispose();
 			 }else {
-				 lblNewLabel_1.setText("Usuario no encontrado");
+				 lblNewLabel_1.setText("User not found");
 			 }
 			}
 	}
