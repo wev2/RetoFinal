@@ -5,6 +5,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import controlador.LoginControlador;
+
 import java.awt.FlowLayout;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -23,7 +26,7 @@ public class VentanaElegir extends JFrame implements ActionListener {
 	private JButton btnModify;
 	private JButton btnShowCases;
 	
-	public VentanaElegir() {
+	public VentanaElegir(VentanaPrincipal ventanaPrincipal, LoginControlador cont) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 619, 375);
 		contentPane = new JPanel();

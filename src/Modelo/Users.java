@@ -1,4 +1,4 @@
-package clases;
+package Modelo;
 
 public class Users {
 	private String id;
@@ -15,6 +15,11 @@ public class Users {
 		this.name = name;
 		this.surname = surname;
 		this.age = age;
+	}
+	
+	public Users(String name_users, String pasword) {
+		this.name_users = name_users;
+		this.pasword = pasword;
 	}
 
 	public String getId() {
@@ -33,11 +38,11 @@ public class Users {
 		this.name_users = name_users;
 	}
 
-	public String getPasword() {
+	public String getPassword() {
 		return pasword;
 	}
 
-	public void setPasword(String pasword) {
+	public void setPassword(String pasword) {
 		this.pasword = pasword;
 	}
 

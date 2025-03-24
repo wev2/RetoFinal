@@ -2,22 +2,20 @@ package Ventanas;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Modelo.Users;
 import controlador.LoginControlador;
-
-import javax.swing.JLabel;
 import java.awt.Font;
+import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.SwingConstants;
 import java.awt.Color;
 import javax.swing.JButton;
@@ -76,7 +74,8 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		contentPane.add(lblNewLabel_1);
 		
 		
-		ImageIcon imagenFondo = new ImageIcon("C:\\Users\\win10\\eclipse-workspace\\RetoFinal\\ertzaina.jpg");//ruta de la imagen
+		ImageIcon imagenFondo = new ImageIcon("C:\\Users\\win10\\eclipse-workspace\\RetoFinal\\ertzaina.jpg");
+		//ruta de la imagen
 
 
         labelFondo = new JLabel(imagenFondo);
@@ -100,18 +99,19 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
         
         
 	}
-
-	public void actionPerformed(ActionEvent e, LoginControlador cont) {
+	@Override
+	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if (e.getSource()==btnCheck) {
-			 if (cont.comprobarUsuario(new Usuario (campoUsuario.getText(),new String(campoContrasena.getPassword())))) {
-				 lblNewLabel_1.setText("User found");
-				 VentanaElegir ve=new  VentanaElegir(this, cont);
-				 ve.setVisible(true);
+			 if (cont.comprobarUsuario(new Users (textUsername.getText(),new String(passwordField.getPassword())))) {
+				 lblNewLabel_1.setText("User logged");
+				 VentanaElegir v=new  VentanaElegir(this, cont);
+				 v.setVisible(true);
 				 dispose();
 			 }else {
 				 lblNewLabel_1.setText("User not found");
 			 }
+			 
 			}
 	}
 }
