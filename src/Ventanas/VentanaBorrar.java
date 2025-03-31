@@ -17,8 +17,8 @@ public class VentanaBorrar extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private LoginControlador cont;
 	
-	public VentanaBorrar(JFrame parent, LoginControlador cont) {
-		super(parent,true);
+	public VentanaBorrar(VentanaElegir ventanaelegir, LoginControlador cont) {
+		super(ventanaelegir,true);
 		this.cont = cont;
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());

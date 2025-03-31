@@ -150,7 +150,7 @@ public class Implementacion {
 
 	}
  
-	/*public Map<String, Users> consultaUsuarios() {
+	public Map<String, Users> consultaUsuarios() {
 // TODO Auto-generated method stub
 
 		ResultSet rs = null;
@@ -167,7 +167,7 @@ public class Implementacion {
 
 // Leemos de uno en uno
 			while (rs.next()) {
-				user = new Users();
+				user = new Users(SQL, SQL);
 				user.setName(rs.getString("nombre"));
 				user.setPassword(rs.getString("contrasena"));
 				equipos.put(user.getName(), user);
@@ -180,8 +180,7 @@ public class Implementacion {
 			e.printStackTrace();
 		}
 		return equipos;
-
-	}*/
+	}
 
 	public boolean borrarUsuario(String user) {
 // TODO Auto-generated method stub
