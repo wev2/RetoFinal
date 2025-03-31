@@ -3,9 +3,9 @@ USE FINALCHALLENGE;
 
 CREATE TABLE USERS(
 ID VARCHAR (20) NOT NULL PRIMARY KEY,
-Nam_USERS VARCHAR (20),
+Nam_USERS VARCHAR (20),/*Username*/
 passwords VARCHAR (30),
-NAME_users VARCHAR(20),
+NAME_users VARCHAR(20),/*Name of the user*/
 SURNAME_USERS VARCHAR (20),
 AGE INTEGER);
 
@@ -20,9 +20,9 @@ DESCRIPTION_CASES VARCHAR(300),
 NUMBER_AGENT INTEGER,
 NUMBER_CRIMINAL INTEGER);
 
-INSERT INTO CASES VALUES (101, 'Robo a Mano Armada', 'Robo cusado por colombianos que usaron machetes en un local de elctronica', 12 , 3),
-(333, 'Robo de vehiculo de lujo', 'Robo de guante blanco de un Audi deportivo', 9	, 2),
-(000, 'Pelea de bandas', 'Un enfremtamiento sin cuartel de dos bandas enemigas', 38 , 12);
+INSERT INTO CASES VALUES (101, 'Armed Robbery', 'Robbery caused by Colombians using machetes at electronics store', 12 , 3),
+(333, 'Theft of luxury vehicle', 'White-collar theft of an Audi sports car', 9	, 2),
+(000, 'Gang fight', 'An all-out confrontation between two opposing gangs', 38 , 12);
 
 CREATE TABLE WORKS(
 ID VARCHAR (20),
@@ -45,9 +45,9 @@ EDAD INTEGER,
 DESCRIPTION_CRIMINAL VARCHAR (300),
 CRIMES VARCHAR (100));
 
-INSERT INTO CRIMINALS VALUES ('12345678F', 'Carlos', 'Gomez', 35, 'Criminal involucrado en múltiples delitos de robo y asalto.', 'Robo, Asalto'),
-('94863562K', 'Jamil', 'Kazar', 56, 'Criminal muy peligroso en busca y captura de manera urgente.', 'Homicidio, Aesinato, Allanamiento de morada, Delitos contra la libertad'),
-('06835513P', 'Samir', 'Merik', 27, 'Criminal involucrado en múltiples delitos de asalto.', 'Violencia domestica, Violencia de Genero');
+INSERT INTO CRIMINALS VALUES ('12345678F', 'Carlos', 'Gomez', 35, 'Criminal involved in multiple robbery and assault offences.', 'Robbery, Assault'),
+('94863562K', 'Jamil', 'Kazar', 56, 'Very dangerous criminal urgently wanted.', 'Homicide, Murder, Breaking and entering, Offences against liberty'),
+('06835513P', 'Samir', 'Merik', 27, 'Criminal involved in multiple assault offences.', 'Domestic violence, Gender-based violence');
 
 CREATE TABLE PARTICIPATE(
 COD_CASES INT,
@@ -60,7 +60,7 @@ FOREIGN KEY (DNI) REFERENCES CRIMINALS(DNI)
 INSERT INTO PARTICIPATE VALUES (101, '12345678F'),
 (333, '94863562K'),
 (000, '06835513P');
-
+/*1*/
 delimiter //
 CREATE FUNCTION GetCriminalCount(CASE_ID INT)
 RETURNS INT
@@ -71,9 +71,9 @@ BEGIN
     FROM PARTICIPATE
     WHERE COD_CASES = CASE_ID;
     RETURN criminal_count;
-END;
-delimiter ;
-
+END //
+delimiter //
+/*2*/
 delimiter //
 CREATE FUNCTION GetAgentName(CASE_ID INT)
 RETURNS VARCHAR(20)
@@ -86,9 +86,9 @@ BEGIN
     WHERE W.COD_CASES = CASE_ID
     LIMIT 1; 
 	RETURN agent_name;
-END;
-delimiter ;
-
+END //
+delimiter //
+/*3*/
 delimiter //
 CREATE PROCEDURE GetCaseDetailsWithCriminals(IN CASE_ID INT)
 BEGIN
@@ -99,10 +99,62 @@ BEGIN
     FROM PARTICIPATE P
     JOIN CRIMINALS CR ON P.DNI = CR.DNI
     WHERE P.COD_CASES = CASE_ID;
-END;
-delimiter ;
+END //
+delimiter //
+/*4*/
+delimiter //
+CREATE PROCEDURE UpdateCriminalAge(IN DNI_CHAR CHAR(9), IN NEW_AGE INT)
+BEGIN
+    UPDATE CRIMINALS
+    SET EDAD = NEW_AGE
+    WHERE DNI = DNI_CHAR;
+	SELECT NAME_CRIMINAL, SURNAME_CRIMINAL, EDAD
+    FROM CRIMINALS
+    WHERE DNI = DNI_CHAR;
+END //
+delimiter //
+/*5*/
+delimiter //
+CREATE PROCEDURE GetCriminalCases(IN DNI_CHAR CHAR(9))
+BEGIN
+    SELECT C.COD_CASES, C.NAME_CASES, C.DESCRIPTION_CASES
+    FROM CASES C
+    JOIN PARTICIPATE P ON C.COD_CASES = P.COD_CASES
+    WHERE P.DNI = DNI_CHAR;
+END //
+delimiter //
+/*6*/
+delimiter //
+CREATE FUNCTION GetUserAgeById(USER_ID VARCHAR(20))
+RETURNS INT
+DETERMINISTIC
+BEGIN
+    DECLARE user_age INT;
+    SELECT AGE INTO user_age
+    FROM USERS
+    WHERE ID = USER_ID;
+    RETURN user_age;
+END //
+delimiter //
+/*7*/
+delimiter //
+CREATE FUNCTION GetCriminalsOlderThan(AGE INT)
+RETURNS VARCHAR(500)
+DETERMINISTIC
+BEGIN
+    DECLARE criminal_info VARCHAR(500);
+    DECLARE done INT DEFAULT FALSE;
+    DECLARE cur CURSOR FOR
+        SELECT CONCAT(NAME_CRIMINAL, ' ', SURNAME_CRIMINAL)
+        FROM CRIMINALS
+        WHERE EDAD > MIN_AGE;
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+    OPEN cur;
+    FETCH cur INTO criminal_info;
+    CLOSE cur;
+    RETURN criminal_info;
+END //
+delimiter //
+
 
 /*drop database FINALCHALLENGE;*/
-
-
-
