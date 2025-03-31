@@ -150,7 +150,7 @@ public class Implementacion {
 
 	}
  
-	public Map<String, Users> consultaUsuarios() {
+	/*public Map<String, Users> consultaUsuarios() {
 // TODO Auto-generated method stub
 
 		ResultSet rs = null;
@@ -181,7 +181,7 @@ public class Implementacion {
 		}
 		return equipos;
 
-	}
+	}*/
 
 	public boolean borrarUsuario(String user) {
 // TODO Auto-generated method stub

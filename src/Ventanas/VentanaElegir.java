@@ -5,9 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import controlador.LoginControlador;
-
 import java.awt.FlowLayout;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -25,8 +23,10 @@ public class VentanaElegir extends JFrame implements ActionListener {
 	private JButton btnInsertarUsuario;
 	private JButton btnModify;
 	private JButton btnShowCases;
+	private LoginControlador cont;
 	
 	public VentanaElegir(VentanaPrincipal ventanaPrincipal, LoginControlador cont) {
+		this.cont = cont;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 619, 375);
 		contentPane = new JPanel();
@@ -60,6 +60,17 @@ public class VentanaElegir extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		
+		if (e.getSource() == btnInsertarUsuario) {
+			VentanaInsertar v=new  VentanaInsertar(this, cont);
+			v.setVisible(true);
+		}
+		if (e.getSource() == btnShowCases) {
+			VentanaVisualizar v = new VentanaVisualizar(this, cont);
+			v.setVisible(true);
+		}
+		if (e.getSource() == btnModify) {
+			VentanaBorrar v = new VentanaBorrar(this, cont);
+			v.setVisible(true);
+		}
 	}
 }
