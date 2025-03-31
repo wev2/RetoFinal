@@ -87,7 +87,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
         btnCheck.setOpaque(false); // Hace que el botón no tenga fondo
         btnCheck.setFont(new Font("Tahoma", Font.BOLD, 14));
         btnCheck.setContentAreaFilled(false);
-        btnCheck.setBorderPainted(true); // Opcional para mostrar el borde
+        btnCheck.setBorderPainted(true);
         
         contentPane.add(btnCheck);
         btnCheck.addActionListener(this);

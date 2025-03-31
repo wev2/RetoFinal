@@ -149,8 +149,8 @@ public class Implementacion {
 		return ok;
 
 	}
-
-/*	public Map<String, Users> consultaUsuarios() {
+ 
+	public Map<String, Users> consultaUsuarios() {
 // TODO Auto-generated method stub
 
 		ResultSet rs = null;
@@ -169,7 +169,7 @@ public class Implementacion {
 			while (rs.next()) {
 				user = new Users();
 				user.setName(rs.getString("nombre"));
-				user.setPasword(rs.getString("contrasena"));
+				user.setPassword(rs.getString("contrasena"));
 				equipos.put(user.getName(), user);
 			}
 			rs.close();
@@ -181,7 +181,7 @@ public class Implementacion {
 		}
 		return equipos;
 
-	}*/
+	}
 
 	public boolean borrarUsuario(String user) {
 // TODO Auto-generated method stub
