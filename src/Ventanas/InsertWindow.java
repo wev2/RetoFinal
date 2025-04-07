@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Modelo.Criminals;
+import Modelo.Users;
 import controlador.LoginControlador;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -150,6 +151,22 @@ public class InsertWindow extends JDialog implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if (e.getSource()==BotonInsertar) {
+				if (cont.comprobarCriminal(new Criminals (AddDNI.getText()))) {
+					JOptionPane.showMessageDialog(InsertWindow.this,
+			            	"El criminal ya existe",
+			            	"Insertar Criminal",
+			            	JOptionPane.INFORMATION_MESSAGE,JOptionPane.INFORMATION_MESSAGE,null);
+				} else {
+					if (AddDNI.getText().isEmpty() || AddName.getText().isEmpty() || AddSurname.getText().isEmpty() || AddAge.getText().isEmpty() || AddDescription.getText().isEmpty() || AddCrimes.getText().isEmpty()) {
+						JOptionPane.showMessageDialog(InsertWindow.this,
+				            	"Rellena todos los campos",
+				            	"Insertar Criminal",
+				            	JOptionPane.INFORMATION_MESSAGE,JOptionPane.INFORMATION_MESSAGE,null);
+					}
+				}
+			
+			
+			
 			if (cont.insertarCriminal(new Criminals (AddDNI.getText(),AddName.getText(),AddSurname.getText(),Integer.parseInt(AddAge.getText()),AddDescription.getText(),AddCrimes.getText()))) {
 		    	int opcion = JOptionPane.showConfirmDialog(InsertWindow.this,
 		            	"Has insertado un criminal correctamente",

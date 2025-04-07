@@ -16,6 +16,10 @@ public class Criminals {
 		this.cri_decription = cri_decription;
 		this.crimes = crimes;
 	}
+	
+	public Criminals(String dni) {
+		this.dni = dni;
+	}
 
 	public String getDni() {
 		return dni;
