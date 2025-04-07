@@ -26,7 +26,7 @@ public class Implementacion {
 
 	final String SQL = "SELECT * FROM users WHERE Nam_USERS = ? AND passwords = ?";
 	final String sql1 = "SELECT * FROM users WHERE ID = ?";
-	final String sqlInsert = "INSERT INTO users VALUES (?,?,?,?,?,?)";
+	final String sqlInsert = "INSERT INTO users VALUES (DNI = ?, NAME_CRIMINAL = ?, SURNAME_CRIMINAL = ?, AGE = ?, DESCRIPTION_CRIMINAL = ?, CRIMES = ?)";
 	final String SQLCONSULTA = "SELECT * FROM users";
 	final String SQLBORRAR = "DELETE FROM users WHERE Nam_USERS=?";
 	final String SQLMODIFICAR = "UPDATE users SET passwords=? WHERE Nam_USERS=?";

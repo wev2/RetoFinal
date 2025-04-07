@@ -141,6 +141,8 @@ public class InsertWindow extends JDialog implements ActionListener {
 		BotonInsertar.setBounds(259, 297, 113, 44);
 		contentPanel.add(BotonInsertar);
 		
+		BotonInsertar.addActionListener(this);
+		
 		
 	}
 

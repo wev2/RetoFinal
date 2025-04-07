@@ -7,7 +7,7 @@ Nam_USERS VARCHAR (20),/*Username*/
 passwords VARCHAR (30),
 NAME_users VARCHAR(20),/*Name of the user*/
 SURNAME_USERS VARCHAR (20),
-AGE INTEGER);
+AGE_U INT);
 
 INSERT INTO USERS VALUES ('12345', 'Juan', 'password123', 'Juan', 'Pérez', 32),
 ('13579', 'Manolo', 'passwor234', 'Manolo', 'Aroan', 69),
@@ -17,8 +17,8 @@ CREATE TABLE CASES(
 COD_CASES INT NOT NULL PRIMARY KEY,
 NAME_CASES VARCHAR(40),
 DESCRIPTION_CASES VARCHAR(300),
-NUMBER_AGENT INTEGER,
-NUMBER_CRIMINAL INTEGER);
+NUMBER_AGENT INT,
+NUMBER_CRIMINAL INT);
 
 INSERT INTO CASES VALUES (101, 'Armed Robbery', 'Robbery caused by Colombians using machetes at electronics store', 12 , 3),
 (333, 'Theft of luxury vehicle', 'White-collar theft of an Audi sports car', 9	, 2),
@@ -41,7 +41,7 @@ CREATE TABLE CRIMINALS(
 DNI CHAR(9) NOT NULL PRIMARY KEY,
 NAME_CRIMINAL VARCHAR (20),
 SURNAME_CRIMINAL VARCHAR(20),
-EDAD INTEGER,
+AGE INT,
 DESCRIPTION_CRIMINAL VARCHAR (300),
 CRIMES VARCHAR (100));
 
@@ -66,95 +66,117 @@ CREATE FUNCTION GetCriminalCount(CASE_ID INT)
 RETURNS INT
 DETERMINISTIC
 BEGIN
-    DECLARE criminal_count INT;
-    SELECT COUNT(*) INTO criminal_count
-    FROM PARTICIPATE
-    WHERE COD_CASES = CASE_ID;
-    RETURN criminal_count;
+	DECLARE criminal_count INT;
+	SELECT COUNT(*) INTO criminal_count
+	FROM PARTICIPATE
+	WHERE COD_CASES = CASE_ID;
+	RETURN criminal_count;
 END //
-delimiter //
+delimiter ;
 /*2*/
 delimiter //
 CREATE FUNCTION GetAgentName(CASE_ID INT)
 RETURNS VARCHAR(20)
 DETERMINISTIC
 BEGIN
-    DECLARE agent_name VARCHAR(20);
-    SELECT U.NAM_USERS INTO agent_name
-    FROM WORKS W
-    JOIN USERS U ON W.ID = U.ID
-    WHERE W.COD_CASES = CASE_ID
-    LIMIT 1; 
+	DECLARE agent_name VARCHAR(20);
+	SELECT U.NAM_USERS INTO agent_name
+	FROM WORKS W
+	JOIN USERS U ON W.ID = U.ID
+	WHERE W.COD_CASES = CASE_ID
+	LIMIT 1;
 	RETURN agent_name;
 END //
-delimiter //
+delimiter ;
 /*3*/
 delimiter //
 CREATE PROCEDURE GetCaseDetailsWithCriminals(IN CASE_ID INT)
 BEGIN
-    SELECT C.NAME_CASES, C.DESCRIPTION_CASES
-    FROM CASES C
-    WHERE C.COD_CASES = CASE_ID;
+	SELECT C.NAME_CASES, C.DESCRIPTION_CASES
+	FROM CASES C
+	WHERE C.COD_CASES = CASE_ID;
 	SELECT CR.NAME_CRIMINAL, CR.SURNAME_CRIMINAL
-    FROM PARTICIPATE P
-    JOIN CRIMINALS CR ON P.DNI = CR.DNI
-    WHERE P.COD_CASES = CASE_ID;
+	FROM PARTICIPATE P
+	JOIN CRIMINALS CR ON P.DNI = CR.DNI
+	WHERE P.COD_CASES = CASE_ID;
 END //
-delimiter //
+delimiter ;
 /*4*/
 delimiter //
 CREATE PROCEDURE UpdateCriminalAge(IN DNI_CHAR CHAR(9), IN NEW_AGE INT)
 BEGIN
-    UPDATE CRIMINALS
-    SET EDAD = NEW_AGE
-    WHERE DNI = DNI_CHAR;
-	SELECT NAME_CRIMINAL, SURNAME_CRIMINAL, EDAD
-    FROM CRIMINALS
-    WHERE DNI = DNI_CHAR;
+	UPDATE CRIMINALS
+	SET AGE = NEW_AGE
+	WHERE DNI = DNI_CHAR;
+	SELECT NAME_CRIMINAL, SURNAME_CRIMINAL, AGE
+	FROM CRIMINALS
+	WHERE DNI = DNI_CHAR;
 END //
-delimiter //
+delimiter ;
 /*5*/
 delimiter //
 CREATE PROCEDURE GetCriminalCases(IN DNI_CHAR CHAR(9))
 BEGIN
-    SELECT C.COD_CASES, C.NAME_CASES, C.DESCRIPTION_CASES
-    FROM CASES C
-    JOIN PARTICIPATE P ON C.COD_CASES = P.COD_CASES
-    WHERE P.DNI = DNI_CHAR;
+	SELECT C.COD_CASES, C.NAME_CASES, C.DESCRIPTION_CASES
+	FROM CASES C
+	JOIN PARTICIPATE P ON C.COD_CASES = P.COD_CASES
+	WHERE P.DNI = DNI_CHAR;
 END //
-delimiter //
+delimiter ;
 /*6*/
 delimiter //
 CREATE FUNCTION GetUserAgeById(USER_ID VARCHAR(20))
 RETURNS INT
 DETERMINISTIC
 BEGIN
-    DECLARE user_age INT;
-    SELECT AGE INTO user_age
-    FROM USERS
-    WHERE ID = USER_ID;
-    RETURN user_age;
+	DECLARE user_age INT;
+	SELECT AGE_U INTO user_age
+	FROM USERS
+	WHERE ID = USER_ID;
+	RETURN user_age;
 END //
-delimiter //
+delimiter ;
 /*7*/
 delimiter //
-CREATE FUNCTION GetCriminalsOlderThan(AGE INT)
-RETURNS VARCHAR(500)
+CREATE PROCEDURE GetCriminalsOlderThan(Min_AGE INT)
+BEGIN
+	DECLARE criminal_info VARCHAR(500);
+	DECLARE done INT DEFAULT 0;
+	DECLARE cur CURSOR FOR
+    	SELECT NAME_CRIMINAL, SURNAME_CRIMINAL
+    	FROM CRIMINALS
+    	WHERE AGE > Min_AGE;/*La idea es que un age sea el de criminal y el otro el que nosotros ponemos*/
+	DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
+	OPEN cur;
+	FETCH cur INTO criminal_info;
+	CLOSE cur;
+END //
+delimiter ;
+call GetCriminalsOlderThan()
+
+
+/*8*/
+delimiter //
+CREATE FUNCTION GetTotalCrimesByCriminal (DNI CHAR(9))
+RETURNS INT
 DETERMINISTIC
 BEGIN
-    DECLARE criminal_info VARCHAR(500);
-    DECLARE done INT DEFAULT FALSE;
-    DECLARE cur CURSOR FOR
-        SELECT CONCAT(NAME_CRIMINAL, ' ', SURNAME_CRIMINAL)
-        FROM CRIMINALS
-        WHERE EDAD > MIN_AGE;
-    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
-    OPEN cur;
-    FETCH cur INTO criminal_info;
-    CLOSE cur;
-    RETURN criminal_info;
+	DECLARE total_crimes INT DEFAULT 0;
+	DECLARE error_message VARCHAR(255);
+    	DECLARE CONTINUE HANDLER FOR SQLEXCEPTION
+    	SET error_message = 'An unexpected error occurred. Please try again later.';
+	BEGIN
+    	SELECT COUNT(*) INTO total_crimes
+    	FROM CRIMINALS
+    	WHERE DNI = DNI;
+    	IF total_crimes = 0 THEN
+        	RETURN -1;
+    	END IF;
+	END;
+	RETURN total_crimes;
 END //
-delimiter //
+DELIMITER ;
 
 
 /*drop database FINALCHALLENGE;*/
+
