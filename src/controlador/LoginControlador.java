@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
 
+import Modelo.Criminals;
 import Modelo.Implementacion;
 import Modelo.UserDAO;
 import Modelo.Users;
@@ -16,10 +17,16 @@ public class LoginControlador {
 		VentanaPrincipal ven = new VentanaPrincipal(this);
 		ven.setVisible(true);	
 	}
-	public boolean comprobarUsuario(Users users){
-		return dao.comprobarUsuario(users);	
+	public boolean comprobarCriminal(Criminals criminal){
+		return dao.comprobarCriminal(criminal);	
 	}
 	public Map<String, Users> consultarUsuarios() {
 		return dao.consultaUsuarios();
+	}
+	public boolean insertarCriminal(Criminals criminal) {
+		return dao.insertarCriminal(criminal);
+	}
+	public boolean comprobarUsuario(Users users) {
+		return dao.comprobarUsuario(users);
 	}
 }

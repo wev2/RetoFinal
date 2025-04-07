@@ -83,7 +83,7 @@ public class VentanaElegir extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if (e.getSource() == btnInsertarUsuario) {
-			VentanaInsertar v=new  VentanaInsertar(this, cont);
+			InsertWindow v=new  InsertWindow(this, cont);
 			v.setVisible(true);
 		}
 		if (e.getSource() == btnShowCases) {

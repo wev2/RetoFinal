@@ -1,4 +1,4 @@
-package clases;
+package Modelo;
 
 public class Cases {
 	private String code_cases;

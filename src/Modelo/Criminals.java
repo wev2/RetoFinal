@@ -1,4 +1,4 @@
-package clases;
+package Modelo;
 
 public class Criminals {
 	private String dni;

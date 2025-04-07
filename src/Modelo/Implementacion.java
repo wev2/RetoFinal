@@ -25,8 +25,8 @@ public class Implementacion {
 // Sentencias SQL
 
 	final String SQL = "SELECT * FROM users WHERE Nam_USERS = ? AND passwords = ?";
-	final String sql1 = "SELECT * FROM users WHERE Nam_USERS = ?";
-	final String sqlInsert = "INSERT INTO users VALUES (?,?)";
+	final String sql1 = "SELECT * FROM users WHERE ID = ?";
+	final String sqlInsert = "INSERT INTO users VALUES (?,?,?,?,?,?)";
 	final String SQLCONSULTA = "SELECT * FROM users";
 	final String SQLBORRAR = "DELETE FROM users WHERE Nam_USERS=?";
 	final String SQLMODIFICAR = "UPDATE users SET passwords=? WHERE Nam_USERS=?";
@@ -74,14 +74,14 @@ public class Implementacion {
 		return existe;
 	}
 
-	public boolean comprobarUsuario1(Users user) {
+	public boolean comprobarCriminal(Criminals criminal) {
 // Abrimos la conexion
 		boolean existe = false;
 		this.openConnection();
 
 		try {
 			stmt = con.prepareStatement(sql1);
-			stmt.setString(1, user.getName());
+			stmt.setString(1, criminal.getDni());
 			ResultSet resultado = stmt.executeQuery();
 
 			// Si hay un resultado, el usuario existe
@@ -100,17 +100,21 @@ public class Implementacion {
 		return existe;
 	}
 
-	public boolean insertarUsuario(Users user) {
+	public boolean insertarCriminal(Criminals criminal) {
 // TODO Auto-generated method stub
-		boolean ok = false;
-		if (!comprobarUsuario1(user)) {
+		boolean ok = false;	
+		if (!comprobarCriminal(criminal)) {
 			this.openConnection();
 			try {
 // Preparamos la sentencia stmt con la conexion y sentencia sql correspondiente
 
 				stmt = con.prepareStatement(sqlInsert);
-				stmt.setString(1, user.getName());
-			    stmt.setString(2, user.getPassword());
+				stmt.setString(1, criminal.getDni());
+			    stmt.setString(2, criminal.getCri_name());
+			    stmt.setString(3, criminal.getCri_surname());
+			    stmt.setInt(4, criminal.getAge());
+			    stmt.setString(5, criminal.getCri_decription());
+			    stmt.setString(6, criminal.getCrimes());
 				if (stmt.executeUpdate() > 0) {
 					ok = true;
 				}
