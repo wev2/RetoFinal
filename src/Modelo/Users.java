@@ -3,23 +3,23 @@ package Modelo;
 public class Users {
 	private String id;
 	private String name_users;
-	private String pasword;
+	private String password;
 	private String name;
 	private String surname;
 	private int age;
 	
-	public Users(String id, String name_users, String pasword, String name, String surname, int age) {
+	public Users(String id, String name_users, String password, String name, String surname, int age) {
 		this.id = id;
 		this.name_users = name_users;
-		this.pasword = pasword;
+		this.password = password;
 		this.name = name;
 		this.surname = surname;
 		this.age = age;
 	}
 	
-	public Users(String name_users, String pasword) {
+	public Users(String name_users, String password) {
 		this.name_users = name_users;
-		this.pasword = pasword;
+		this.password = password;
 	}
 
 	public String getId() {
@@ -39,11 +39,11 @@ public class Users {
 	}
 
 	public String getPassword() {
-		return pasword;
+		return password;
 	}
 
 	public void setPassword(String pasword) {
-		this.pasword = pasword;
+		this.password = pasword;
 	}
 
 	public String getName() {
@@ -72,7 +72,7 @@ public class Users {
 
 	@Override
 	public String toString() {
-		return "Users [id=" + id + ", name_users=" + name_users + ", pasword=" + pasword + ", name=" + name
+		return "Users [id=" + id + ", name_users=" + name_users + ", pasword=" + password + ", name=" + name
 				+ ", surname=" + surname + ", age=" + age + "]";
 	}
 }
