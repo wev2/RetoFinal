@@ -114,15 +114,16 @@ public class Implementacion {
 		return ok;
 	}
 
-	public Map<String, Users> consultaUsuarios() {
-		Map<String, Users> usuarios = new TreeMap<>();
+	public Map<String, Cases> consultaUsuarios() {
+		Map<String, Cases> usuarios = new TreeMap<>();
 		openConnection();
 		try {
 			stmt = con.prepareStatement(SQL_SELECT_ALL);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
-				Users user = new Users(rs.getString("name_users"), rs.getString("password"));
-				usuarios.put(user.getName(), user);
+				Cases cases = new Cases(rs.getString("name_c"), rs.getString("code_cases"), rs.getString("description"),
+						rs.getInt("number_ag"), rs.getInt("number_cr"));
+				usuarios.put(cases.getName_c(), cases);
 			}
 			rs.close();
 			stmt.close();

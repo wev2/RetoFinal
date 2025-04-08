@@ -1,17 +1,14 @@
 package Ventanas;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import Modelo.Criminals;
 import controlador.LoginControlador;
 import javax.swing.JLabel;
@@ -33,14 +30,25 @@ public class InsertWindow extends JDialog implements ActionListener {
 	private JTextField AddAge;
 	private JTextField AddSurname;
 	private JTextField AddName;
-	private JTextField AddDescription;
-	private JTextField AddCrimes;
+	private JTextPane AddDescription;
+	private JTextPane AddCrimes;
 	private JButton BotonInsertar = new JButton("CONFIRMAR");
+	private JLabel lblDescription;
+	private JLabel lblCrimes;
+	private JLabel lblNewLabel;
+	private JLabel Text_Name;
+	private JLabel Text_DNI;
+	private JLabel Text_Surname;
+	private JLabel Text_Age;
+	private JLabel Text_Image;
+	private JLabel TitelWindow;
+	
 
 	public InsertWindow(JFrame parent, LoginControlador cont) {
 		
-	
 		super(parent,true);
+		setTitle("Insert Criminal");
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\win10\\eclipse-workspace\\RetoFinal\\iconoertzaina2.jpg"));
 		this.cont = cont;
 		setBounds(100, 100, 625, 403);
 		getContentPane().setLayout(new BorderLayout());
@@ -48,14 +56,14 @@ public class InsertWindow extends JDialog implements ActionListener {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
-		JLabel TitelWindow = new JLabel("ADD CRIMINAL");
+		TitelWindow = new JLabel("ADD CRIMINAL");
 		TitelWindow.setBounds(158, 10, 281, 44);
 		TitelWindow.setFont(new Font("Times New Roman", Font.BOLD, 20));
 		TitelWindow.setForeground(new Color(0, 64, 128));
 		TitelWindow.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPanel.add(TitelWindow);
 		
-		JLabel Text_Name = new JLabel("Name:");
+		Text_Name = new JLabel("Name:");
 		Text_Name.setBounds(20, 93, 77, 32);
 		Text_Name.setHorizontalAlignment(SwingConstants.RIGHT);
 		Text_Name.setForeground(Color.BLACK);
@@ -67,25 +75,25 @@ public class InsertWindow extends JDialog implements ActionListener {
 		contentPanel.add(AddDNI);
 		AddDNI.setColumns(10);
 		
-		JLabel lblDescription = new JLabel("Description");
+		lblDescription = new JLabel("Description");
 		lblDescription.setBounds(20, 235, 229, 38);
 		lblDescription.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDescription.setForeground(Color.BLACK);
 		lblDescription.setFont(new Font("Times New Roman", Font.BOLD, 16));
 		contentPanel.add(lblDescription);
 		
-		JLabel lblCrimes = new JLabel("Crimes");
+		lblCrimes = new JLabel("Crimes");
 		lblCrimes.setBounds(379, 235, 222, 38);
 		lblCrimes.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCrimes.setForeground(Color.BLACK);
 		lblCrimes.setFont(new Font("Times New Roman", Font.BOLD, 16));
 		contentPanel.add(lblCrimes);
 		
-		JTextPane AddDescription = new JTextPane();
+		AddDescription = new JTextPane();
 		AddDescription.setBounds(20, 271, 229, 85);
 		contentPanel.add(AddDescription);
 		
-		JTextPane AddCrimes = new JTextPane();
+		AddCrimes = new JTextPane();
 		AddCrimes.setBounds(382, 271, 219, 85);
 		contentPanel.add(AddCrimes);
 		
@@ -104,40 +112,40 @@ public class InsertWindow extends JDialog implements ActionListener {
 		AddName.setColumns(10);
 		contentPanel.add(AddName);
 		
-		JLabel Text_DNI = new JLabel("DNI:");
+		Text_DNI = new JLabel("DNI:");
 		Text_DNI.setHorizontalAlignment(SwingConstants.RIGHT);
 		Text_DNI.setForeground(Color.BLACK);
 		Text_DNI.setFont(new Font("Times New Roman", Font.BOLD, 16));
 		Text_DNI.setBounds(20, 56, 77, 32);
 		contentPanel.add(Text_DNI);
 		
-		JLabel Text_Surname = new JLabel("Surname:");
+		Text_Surname = new JLabel("Surname:");
 		Text_Surname.setHorizontalAlignment(SwingConstants.RIGHT);
 		Text_Surname.setForeground(Color.BLACK);
 		Text_Surname.setFont(new Font("Times New Roman", Font.BOLD, 16));
 		Text_Surname.setBounds(20, 132, 77, 32);
 		contentPanel.add(Text_Surname);
 		
-		JLabel Text_Age = new JLabel("Age:");
+		Text_Age = new JLabel("Age:");
 		Text_Age.setHorizontalAlignment(SwingConstants.RIGHT);
 		Text_Age.setForeground(Color.BLACK);
 		Text_Age.setFont(new Font("Times New Roman", Font.BOLD, 16));
 		Text_Age.setBounds(20, 174, 77, 32);
 		contentPanel.add(Text_Age);
 		
-		JLabel Text_Image = new JLabel("Image");
+		Text_Image = new JLabel("Image");
 		Text_Image.setHorizontalAlignment(SwingConstants.CENTER);
 		Text_Image.setForeground(Color.BLACK);
 		Text_Image.setFont(new Font("Times New Roman", Font.BOLD, 16));
 		Text_Image.setBounds(434, 56, 95, 32);
 		contentPanel.add(Text_Image);
 		
-		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\1dami\\eclipse-workspace\\RetoFinal\\Imagenes\\fotocriminal1.jpg"));
 		lblNewLabel.setBounds(398, 93, 174, 148);
 		contentPanel.add(lblNewLabel);
 		
-		JButton BotonInsertar = new JButton("CONFIRMAR");
+		BotonInsertar = new JButton("CONFIRMAR");
 		BotonInsertar.setBounds(259, 297, 113, 44);
 		contentPanel.add(BotonInsertar);
 		

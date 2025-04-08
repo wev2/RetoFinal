@@ -2,13 +2,12 @@ package Ventanas;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.Toolkit;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import controlador.LoginControlador;
 
 public class VentanaBorrar extends JDialog {
@@ -19,6 +18,9 @@ public class VentanaBorrar extends JDialog {
 	
 	public VentanaBorrar(VentanaElegir ventanaelegir, LoginControlador cont) {
 		super(ventanaelegir,true);
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\win10\\eclipse-workspace\\RetoFinal\\iconoertzaina2.jpg"));
+		setTitle("Delete Criminal");
+		this.isModal();
 		this.cont = cont;
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());

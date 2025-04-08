@@ -1,13 +1,10 @@
 package controlador;
 import Ventanas.VentanaPrincipal;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.Component;
 import java.util.Map;
-
+import Modelo.Cases;
 import Modelo.Criminals;
 import Modelo.Implementacion;
-import Modelo.UserDAO;
 import Modelo.Users;
 
 public class LoginControlador {
@@ -20,7 +17,7 @@ public class LoginControlador {
 	public boolean comprobarCriminal(Criminals criminal){
 		return dao.comprobarCriminal(criminal);	
 	}
-	public Map<String, Users> consultarUsuarios() {
+	public Map<String, Cases> consultarUsuarios() {
 		return dao.consultaUsuarios();
 	}
 	public boolean insertarCriminal(Criminals criminal) {
@@ -29,4 +26,9 @@ public class LoginControlador {
 	public boolean comprobarUsuario(Users users) {
 		return dao.comprobarUsuario(users);
 	}
+	public Component getUsuario() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 }

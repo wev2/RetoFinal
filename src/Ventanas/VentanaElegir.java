@@ -1,21 +1,18 @@
 package Ventanas;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import controlador.LoginControlador;
-import java.awt.FlowLayout;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import java.awt.SystemColor;
 
 public class VentanaElegir extends JFrame implements ActionListener {
 
@@ -29,6 +26,7 @@ public class VentanaElegir extends JFrame implements ActionListener {
 	private JLabel lblImagen;
 	
 	public VentanaElegir(VentanaPrincipal ventanaPrincipal, LoginControlador cont) {
+		setTitle("Menu");
 		this.cont = cont;
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\win10\\eclipse-workspace\\RetoFinal\\iconoertzaina2.jpg"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -40,7 +38,8 @@ public class VentanaElegir extends JFrame implements ActionListener {
 		contentPane.setLayout(null);
 		
 		lblBienvenida = new JLabel(" ");
-		lblBienvenida.setBounds(62, 10, 477, 48);
+		lblBienvenida.setForeground(SystemColor.activeCaptionText);
+		lblBienvenida.setBounds(61, 0, 477, 48);
 		lblBienvenida.setFont(new Font("Times New Roman", Font.BOLD, 19));
 		lblBienvenida.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPane.add(lblBienvenida);
@@ -72,6 +71,10 @@ public class VentanaElegir extends JFrame implements ActionListener {
         contentPane.add(lblImagen);
         contentPane.add(lblImagen); // Establecer el fondo después de los botones
         
+        JLabel lblNewLabel = new JLabel("New label");
+        lblNewLabel.setBounds(284, 30, 265, 48);
+        contentPane.add(lblNewLabel);
+        
         btnInsertarUsuario.addActionListener(this);
         btnShowCases.addActionListener(this);
         btnModify.addActionListener(this);
@@ -82,6 +85,9 @@ public class VentanaElegir extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		if (e.getSource() == lblBienvenida) {
+			lblBienvenida.setText("Welcome to the Ertzaina App");
+		}
 		if (e.getSource() == btnInsertarUsuario) {
 			InsertWindow v=new  InsertWindow(this, cont);
 			v.setVisible(true);
