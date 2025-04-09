@@ -36,7 +36,7 @@ public class InsertWindow extends JDialog implements ActionListener {
 	private JTextField AddName;
 	private JTextPane AddDescription;
 	private JTextPane AddCrimes;
-	private JButton BotonInsertar = new JButton("CONFIRMAR");
+	private JButton BotonInsertar = new JButton("CONFIRM");
 	public InsertWindow(JFrame parent, LoginControlador cont) {
 
 
@@ -129,7 +129,7 @@ public class InsertWindow extends JDialog implements ActionListener {
 		lblNewLabelFoto.setEnabled(false);
 		lblNewLabelFoto.setFont(new Font("Tahoma", Font.PLAIN, 5));
 		lblNewLabelFoto.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabelFoto.setIcon(new ImageIcon("C:\\Users\\1dami\\eclipse-workspace\\RetoFinal\\Imagenes\\criminal.jpg"));
+		lblNewLabelFoto.setIcon(new ImageIcon("C:\\Users\\koraw_54jmcxu\\eclipse-workspace\\RetoFinal\\Imagenes\\criminal.jpg"));
 		lblNewLabelFoto.setBounds(407, 56, 177, 177);
 		contentPanel.add(lblNewLabelFoto);
 
@@ -146,26 +146,26 @@ public class InsertWindow extends JDialog implements ActionListener {
 		if (e.getSource()==BotonInsertar) {
 			if (AddDNI.getText().length() != 9) {
 				JOptionPane.showMessageDialog(InsertWindow.this,
-						"El DNI tiene que tener 9 caracteres",
-						"Insertar Criminal",
+						"The DNI must be 9 characters long",
+						"Insert Criminal",
 						JOptionPane.INFORMATION_MESSAGE,null);
 			} else {
 				if (AddDNI.getText().isEmpty() || AddName.getText().isEmpty() || AddSurname.getText().isEmpty() || AddAge.getText().isEmpty() || AddDescription.getText().isEmpty() || AddCrimes.getText().isEmpty()) {
 					JOptionPane.showMessageDialog(InsertWindow.this,
-							"Rellena todos los campos",
-							"Insertar Criminal",
+							"All fields are required",
+							"Insert Criminal",
 							JOptionPane.INFORMATION_MESSAGE,null);
 				} else {
 					if (cont.comprobarCriminal(new Criminals (AddDNI.getText()))) {
 						JOptionPane.showMessageDialog(InsertWindow.this,
-								"El criminal ya existe",
-								"Insertar Criminal",
+								"The criminal already exists",
+								"Insert Criminal",
 								JOptionPane.INFORMATION_MESSAGE,null);
 					} else {
 						if (cont.insertarCriminal(new Criminals (AddDNI.getText(),AddName.getText(),AddSurname.getText(),Integer.parseInt(AddAge.getText()),AddDescription.getText(),AddCrimes.getText()))) {
 							JOptionPane.showMessageDialog(InsertWindow.this,
-									"Has insertado un criminal correctamente",
-									"Insertar Criminal",
+									"The criminal has been inserted",
+									"Insert Criminal",
 									JOptionPane.INFORMATION_MESSAGE,null);
 						}
 					}

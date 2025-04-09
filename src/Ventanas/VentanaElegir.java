@@ -34,7 +34,7 @@ public class VentanaElegir extends JFrame implements ActionListener {
 	
 	public VentanaElegir(VentanaPrincipal ventanaPrincipal, LoginControlador cont) {
 		this.cont = cont;
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\win10\\eclipse-workspace\\RetoFinal\\iconoertzaina2.jpg"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\koraw_54jmcxu\\eclipse-workspace\\RetoFinal\\Imagenes\\iconoertzaina2.jpg"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 619, 375);
 		contentPane = new JPanel();
@@ -44,19 +44,19 @@ public class VentanaElegir extends JFrame implements ActionListener {
 		contentPane.setLayout(null);
 		
 		btnInsertarUsuario = new JButton("");
-		btnInsertarUsuario.setIcon(new ImageIcon("C:\\Users\\1dami\\eclipse-workspace\\RetoFinal\\Imagenes\\añadir criminal.png"));
+		btnInsertarUsuario.setIcon(new ImageIcon("C:\\Users\\koraw_54jmcxu\\eclipse-workspace\\RetoFinal\\Imagenes\\añadir criminal.png"));
 		btnInsertarUsuario.setBounds(47, 136, 103, 103);
 		btnInsertarUsuario.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		contentPane.add(btnInsertarUsuario);
 		
 		btnShowCases = new JButton("");
-		btnShowCases.setIcon(new ImageIcon("C:\\Users\\1dami\\eclipse-workspace\\RetoFinal\\Imagenes\\mostrar.jpg"));
+		btnShowCases.setIcon(new ImageIcon("C:\\Users\\koraw_54jmcxu\\eclipse-workspace\\RetoFinal\\Imagenes\\mostrar.jpg"));
 		btnShowCases.setBounds(445, 136, 103, 103);
 		btnShowCases.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		contentPane.add(btnShowCases);
 		
 		btnModify = new JButton("");
-		btnModify.setIcon(new ImageIcon("C:\\Users\\1dami\\eclipse-workspace\\RetoFinal\\Imagenes\\modificar.jpg"));
+		btnModify.setIcon(new ImageIcon("C:\\Users\\koraw_54jmcxu\\eclipse-workspace\\RetoFinal\\Imagenes\\modificar.jpg"));
 		btnModify.setBounds(245, 136, 103, 103);
 		btnModify.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		contentPane.add(btnModify);
@@ -88,7 +88,7 @@ public class VentanaElegir extends JFrame implements ActionListener {
         txtShowCases.setBounds(429, 249, 131, 31);
         contentPane.add(txtShowCases);
         
-        ImageIcon imagenFondo = new ImageIcon("C:\\Users\\1dami\\eclipse-workspace\\RetoFinal\\Imagenes\\ertzaina.jpg");
+        ImageIcon imagenFondo = new ImageIcon("C:\\Users\\koraw_54jmcxu\\eclipse-workspace\\RetoFinal\\Imagenes\\ertzaina.jpg");
 		//ruta de la imagen
 		
         lblImagen = new JLabel(imagenFondo);
@@ -115,7 +115,7 @@ public class VentanaElegir extends JFrame implements ActionListener {
 			v.setVisible(true);
 		}
 		if (e.getSource() == btnModify) {
-			VentanaBorrar v = new VentanaBorrar(this, cont);
+			ModifyAndDelete v = new ModifyAndDelete(this, cont );
 			v.setVisible(true);
 		}
 	}

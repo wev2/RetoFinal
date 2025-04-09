@@ -29,4 +29,7 @@ public class LoginControlador {
 	public boolean comprobarUsuario(Users users) {
 		return dao.comprobarUsuario(users);
 	}
+	public boolean DeleteCriminal(Criminals criminals) {
+		return dao.DeleteCriminal(criminals);
+	}
 }

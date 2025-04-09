@@ -10,30 +10,30 @@ import java.util.ResourceBundle;
 import java.util.TreeMap;
 
 public class Implementacion {
-// Atributos
+	// Atributos
 	private Connection con;
 	private PreparedStatement stmt;
 
-// Los siguientes atributos se utilizan para recoger los valores del fich de
-// configuraci n
+	// Los siguientes atributos se utilizan para recoger los valores del fich de
+	// configuraci n
 	private ResourceBundle configFile;
 	private String driverBD;
 	private String urlBD;
 	private String userBD;
 	private String passwordBD;
 
-// Sentencias SQL
+	// Sentencias SQL
 
 	final String SQL = "SELECT * FROM users WHERE Nam_USERS = ? AND passwords = ?";
 	final String sql1 = "SELECT * FROM users WHERE ID = ?";
-	final String sql2 = "SELECT * FROM criminals WHERE ID = ?";
+	final String sql2 = "SELECT * FROM criminals WHERE DNI = ?";
 	final String sqlInsert = "INSERT INTO criminals VALUES 	(?,?,?,?,?,?)";
 	final String SQLCONSULTA = "SELECT * FROM users";
-	final String SQLBORRAR = "DELETE FROM users WHERE Nam_USERS=?";
-	final String SQLMODIFICAR = "UPDATE users SET passwords=? WHERE Nam_USERS=?";
+	final String SQLBORRAR = "DELETE FROM criminals WHERE DNI=?";
+	final String SQLMODIFICAR = "UPDATE criminals SET NAME_CRIMINAL = ?, SURNAME_CRIMINAL = ?, EDAD = ?, DESCRIPTION_CRIMINAL = ?, CRIMES = ? WHERE DNI = ?";
 
-// Para la conexi n utilizamos un fichero de configuaraci n, config que
-// guardamos en el paquete control:
+	// Para la conexi n utilizamos un fichero de configuaraci n, config que
+	// guardamos en el paquete control:
 	public Implementacion() {
 		this.configFile = ResourceBundle.getBundle("modelo.configClase");
 		this.driverBD = this.configFile.getString("Driver");
@@ -54,7 +54,7 @@ public class Implementacion {
 	}
 
 	public boolean comprobarUsuario(Users user) {
-// Abrimos la conexion
+		// Abrimos la conexion
 		boolean existe = false;
 		this.openConnection();
 		try {
@@ -76,7 +76,7 @@ public class Implementacion {
 	}
 
 	public boolean comprobarCriminal(Criminals criminals) {
-// Abrimos la conexion
+		// Abrimos la conexion
 		boolean yaexiste = false;
 		this.openConnection();
 
@@ -102,12 +102,12 @@ public class Implementacion {
 	}
 
 	public boolean insertarCriminal(Criminals criminals) {
-// TODO Auto-generated method stub
+		// TODO Auto-generated method stub
 		boolean ok = false;	
 		if (!comprobarCriminal(criminals)) {
 			this.openConnection();
 			try {
-// Preparamos la sentencia stmt con la conexion y sentencia sql correspondiente
+				// Preparamos la sentencia stmt con la conexion y sentencia sql correspondiente
 
 				stmt = con.prepareStatement(sqlInsert);
 				stmt.setString(1, criminals.getDni());
@@ -126,16 +126,16 @@ public class Implementacion {
 			}
 		}
 		return ok;
-		
+
 	}
 
 	public boolean actualizarUsuario(Users user) {
-// TODO Auto-generated method stub
+		// TODO Auto-generated method stub
 		boolean ok = false;
 
 		this.openConnection();
 		try {
-// Preparamos la sentencia stmt con la conexion y sentencia sql correspondiente
+			// Preparamos la sentencia stmt con la conexion y sentencia sql correspondiente
 
 			stmt = con.prepareStatement(SQLMODIFICAR);
 			stmt.setString(2, user.getName());
@@ -153,15 +153,15 @@ public class Implementacion {
 		return ok;
 
 	}
- 
+
 	public Map<String, Users> consultaUsuarios() {
-// TODO Auto-generated method stub
+		// TODO Auto-generated method stub
 
 		ResultSet rs = null;
 		Users user;
 		Map<String, Users> equipos = new TreeMap<>();
 
-// Abrimos la conexi n
+		// Abrimos la conexi n
 		this.openConnection();
 
 		try {
@@ -169,7 +169,7 @@ public class Implementacion {
 
 			rs = stmt.executeQuery();
 
-// Leemos de uno en uno
+			// Leemos de uno en uno
 			while (rs.next()) {
 				user = new Users(SQL, SQL);
 				user.setName(rs.getString("nombre"));
@@ -186,28 +186,56 @@ public class Implementacion {
 		return equipos;
 	}
 
-	public boolean borrarUsuario(String user) {
-// TODO Auto-generated method stub
-		boolean ok = false;
+	public boolean DeleteCriminal(Criminals criminals) {
+		// TODO Auto-generated method stub
+		boolean ok = false;	
+		if (comprobarCriminal(criminals)) {
+			this.openConnection();
+			try {
+				// Preparamos la sentencia stmt con la conexion y sentencia sql correspondiente
 
-		this.openConnection();
-		try {
-// Preparamos la sentencia stmt con la conexion y sentencia sql correspondiente
+				stmt = con.prepareStatement(SQLBORRAR);
+				stmt.setString(1, criminals.getDni());
+				if (stmt.executeUpdate() > 0) {
+					ok = true;
+				}
 
-			stmt = con.prepareStatement(SQLBORRAR);
-			stmt.setString(1, user);
-			if (stmt.executeUpdate() > 0) {
-				ok = true;
+				stmt.close();
+				con.close();
+			} catch (SQLException e) {
+				System.out.println("Error al verificar credenciales: " + e.getMessage());
 			}
 
-			stmt.close();
-			con.close();
-		} catch (SQLException e) {
-			System.out.println("Error al verificar credenciales: " + e.getMessage());
 		}
-
 		return ok;
-
 	}
+	
+	public boolean ModifyCriminal(Criminals criminals) {
+		// TODO Auto-generated method stub
+		boolean ok = false;	
+		if (comprobarCriminal(criminals)) {
+			this.openConnection();
+			try {
+				// Preparamos la sentencia stmt con la conexion y sentencia sql correspondiente
 
+				stmt = con.prepareStatement(SQLMODIFICAR);
+				stmt.setString(1, criminals.getDni());
+				stmt.setString(2, criminals.getCri_name());
+				stmt.setString(3, criminals.getCri_surname());
+				stmt.setInt(4, criminals.getAge());
+				stmt.setString(5, criminals.getCri_decription());
+				stmt.setString(6, criminals.getCrimes());
+				if (stmt.executeUpdate() > 0) {
+					ok = true;
+				}
+
+				stmt.close();
+				con.close();
+			} catch (SQLException e) {
+				System.out.println("Error al verificar credenciales: " + e.getMessage());
+			}
+
+		}
+		return ok;
+	}
 }
