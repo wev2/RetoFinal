@@ -18,6 +18,7 @@ public class VentanaBorrar extends JDialog {
 	
 	public VentanaBorrar(VentanaElegir ventanaelegir, LoginControlador cont) {
 		super(ventanaelegir,true);
+		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\win10\\eclipse-workspace\\RetoFinal\\iconoertzaina2.jpg"));
 		setTitle("Delete Criminal");
 		this.isModal();

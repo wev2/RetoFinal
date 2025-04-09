@@ -47,6 +47,7 @@ public class InsertWindow extends JDialog implements ActionListener {
 	public InsertWindow(JFrame parent, LoginControlador cont) {
 		
 		super(parent,true);
+		setResizable(false);
 		setTitle("Insert Criminal");
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\win10\\eclipse-workspace\\RetoFinal\\iconoertzaina2.jpg"));
 		this.cont = cont;

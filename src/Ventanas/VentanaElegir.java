@@ -27,6 +27,7 @@ public class VentanaElegir extends JFrame implements ActionListener {
 	
 	public VentanaElegir(VentanaPrincipal ventanaPrincipal, LoginControlador cont) {
 		setTitle("Menu");
+		setResizable(false);
 		this.cont = cont;
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\win10\\eclipse-workspace\\RetoFinal\\iconoertzaina2.jpg"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

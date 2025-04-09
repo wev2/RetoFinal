@@ -25,6 +25,7 @@ public class VentanaVisualizar extends JDialog {
 	
 	public VentanaVisualizar(VentanaElegir ventanaelegir, LoginControlador cont) {
 		super(ventanaelegir,true);
+		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\win10\\eclipse-workspace\\RetoFinal\\iconoertzaina2.jpg"));
 		ventanaelegir.setVisible(false);
 		setResizable(false);

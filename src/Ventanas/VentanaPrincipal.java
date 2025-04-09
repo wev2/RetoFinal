@@ -34,6 +34,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 	private LoginControlador cont = new LoginControlador();
 
 	public VentanaPrincipal(LoginControlador cont) {
+		setResizable(false);
 		setFont(new Font("Dialog", Font.BOLD, 12));
 		setTitle("Ertzaintza Login");
 		this.cont = cont;
