@@ -17,14 +17,14 @@ public class LoginControlador {
 		VentanaPrincipal ven = new VentanaPrincipal(this);
 		ven.setVisible(true);	
 	}
-	public boolean comprobarCriminal(Criminals criminal){
-		return dao.comprobarCriminal(criminal);	
+	public boolean comprobarCriminal(Criminals criminals){
+		return dao.comprobarCriminal(criminals);	
 	}
 	public Map<String, Users> consultarUsuarios() {
 		return dao.consultaUsuarios();
 	}
-	public boolean insertarCriminal(Criminals criminal) {
-		return dao.insertarCriminal(criminal);
+	public boolean insertarCriminal(Criminals criminals) {
+		return dao.insertarCriminal(criminals);
 	}
 	public boolean comprobarUsuario(Users users) {
 		return dao.comprobarUsuario(users);

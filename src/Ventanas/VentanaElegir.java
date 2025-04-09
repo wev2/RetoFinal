@@ -16,17 +16,21 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JTextField;
+import java.awt.Color;
 
 public class VentanaElegir extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JLabel lblBienvenida;
 	private JButton btnInsertarUsuario;
 	private JButton btnModify;
 	private JButton btnShowCases;
 	private LoginControlador cont;
 	private JLabel lblImagen;
+	private JTextField txtAddCriminal;
+	private JTextField txtModifyDelete;
+	private JTextField txtShowCases;
 	
 	public VentanaElegir(VentanaPrincipal ventanaPrincipal, LoginControlador cont) {
 		this.cont = cont;
@@ -39,36 +43,56 @@ public class VentanaElegir extends JFrame implements ActionListener {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		lblBienvenida = new JLabel(" ");
-		lblBienvenida.setBounds(62, 10, 477, 48);
-		lblBienvenida.setFont(new Font("Times New Roman", Font.BOLD, 19));
-		lblBienvenida.setHorizontalAlignment(SwingConstants.CENTER);
-		contentPane.add(lblBienvenida);
-		
-		btnInsertarUsuario = new JButton("Add new criminal");
-		btnInsertarUsuario.setBounds(83, 235, 149, 62);
+		btnInsertarUsuario = new JButton("");
+		btnInsertarUsuario.setIcon(new ImageIcon("C:\\Users\\1dami\\eclipse-workspace\\RetoFinal\\Imagenes\\añadir criminal.png"));
+		btnInsertarUsuario.setBounds(47, 136, 103, 103);
 		btnInsertarUsuario.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		contentPane.add(btnInsertarUsuario);
 		
-		btnShowCases = new JButton("Show cases");
-		btnShowCases.setBounds(372, 235, 149, 62);
+		btnShowCases = new JButton("");
+		btnShowCases.setIcon(new ImageIcon("C:\\Users\\1dami\\eclipse-workspace\\RetoFinal\\Imagenes\\mostrar.jpg"));
+		btnShowCases.setBounds(445, 136, 103, 103);
 		btnShowCases.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		contentPane.add(btnShowCases);
 		
-		btnModify = new JButton("Update/Modify cases");
-		btnModify.setBounds(229, 130, 149, 62);
+		btnModify = new JButton("");
+		btnModify.setIcon(new ImageIcon("C:\\Users\\1dami\\eclipse-workspace\\RetoFinal\\Imagenes\\modificar.jpg"));
+		btnModify.setBounds(245, 136, 103, 103);
 		btnModify.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		contentPane.add(btnModify);
-		
-		
-		
-		ImageIcon imagenFondo = new ImageIcon("C:\\Users\\win10\\eclipse-workspace\\RetoFinal\\ertzaina.jpg");
+        
+        txtAddCriminal = new JTextField();
+        txtAddCriminal.setEditable(false);
+        txtAddCriminal.setHorizontalAlignment(SwingConstants.CENTER);
+        txtAddCriminal.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        txtAddCriminal.setText("Add Criminal");
+        txtAddCriminal.setBounds(34, 249, 131, 31);
+        contentPane.add(txtAddCriminal);
+        txtAddCriminal.setColumns(10);
+      
+        txtModifyDelete = new JTextField();
+        txtModifyDelete.setEditable(false);
+        txtModifyDelete.setText("Modify/Delete");
+        txtModifyDelete.setHorizontalAlignment(SwingConstants.CENTER);
+        txtModifyDelete.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        txtModifyDelete.setColumns(10);
+        txtModifyDelete.setBounds(230, 249, 131, 31);
+        contentPane.add(txtModifyDelete);
+        
+        txtShowCases = new JTextField();
+        txtShowCases.setEditable(false);
+        txtShowCases.setText("Show Cases");
+        txtShowCases.setHorizontalAlignment(SwingConstants.CENTER);
+        txtShowCases.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        txtShowCases.setColumns(10);
+        txtShowCases.setBounds(429, 249, 131, 31);
+        contentPane.add(txtShowCases);
+        
+        ImageIcon imagenFondo = new ImageIcon("C:\\Users\\1dami\\eclipse-workspace\\RetoFinal\\Imagenes\\ertzaina.jpg");
 		//ruta de la imagen
 		
-
-
         lblImagen = new JLabel(imagenFondo);
-        lblImagen.setBounds(10, 0, 594, 938);
+        lblImagen.setBounds(0, 0, 604, 938);
         contentPane.add(lblImagen);
         contentPane.add(lblImagen); // Establecer el fondo después de los botones
         

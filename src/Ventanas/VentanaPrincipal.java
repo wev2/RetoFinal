@@ -82,6 +82,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		contentPane.add(labelFondo);
 
 		btnCheck = new JButton("Check");
+		btnCheck.setForeground(new Color(255, 255, 0));
 		btnCheck.setBounds(198, 275, 236, 23);
 		btnCheck.setOpaque(false); // Hace que el botón no tenga fondo
 		btnCheck.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -95,7 +96,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 
 		contentPane.setVisible(true);
 
-
+		
 
 	}
 	@Override
@@ -110,7 +111,6 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 			}else {
 				lblNewLabel_1.setText("User not found");
 			}
-
 		}
 	}
 }

@@ -26,7 +26,8 @@ public class Implementacion {
 
 	final String SQL = "SELECT * FROM users WHERE Nam_USERS = ? AND passwords = ?";
 	final String sql1 = "SELECT * FROM users WHERE ID = ?";
-	final String sqlInsert = "INSERT INTO users VALUES (DNI = ?, NAME_CRIMINAL = ?, SURNAME_CRIMINAL = ?, AGE = ?, DESCRIPTION_CRIMINAL = ?, CRIMES = ?)";
+	final String sql2 = "SELECT * FROM criminals WHERE ID = ?";
+	final String sqlInsert = "INSERT INTO criminals VALUES 	(?,?,?,?,?,?)";
 	final String SQLCONSULTA = "SELECT * FROM users";
 	final String SQLBORRAR = "DELETE FROM users WHERE Nam_USERS=?";
 	final String SQLMODIFICAR = "UPDATE users SET passwords=? WHERE Nam_USERS=?";
@@ -74,19 +75,19 @@ public class Implementacion {
 		return existe;
 	}
 
-	public boolean comprobarCriminal(Criminals criminal) {
+	public boolean comprobarCriminal(Criminals criminals) {
 // Abrimos la conexion
-		boolean existe = false;
+		boolean yaexiste = false;
 		this.openConnection();
 
 		try {
-			stmt = con.prepareStatement(sql1);
-			stmt.setString(1, criminal.getDni());
+			stmt = con.prepareStatement(sql2);
+			stmt.setString(1, criminals.getDni());
 			ResultSet resultado = stmt.executeQuery();
 
 			// Si hay un resultado, el usuario existe
 			if (resultado.next()) {
-				existe = true;
+				yaexiste = true;
 			}
 
 			resultado.close();
@@ -97,28 +98,27 @@ public class Implementacion {
 			System.out.println("Error al verificar credenciales: " + e.getMessage());
 		}
 
-		return existe;
+		return yaexiste;
 	}
 
-	public boolean insertarCriminal(Criminals criminal) {
+	public boolean insertarCriminal(Criminals criminals) {
 // TODO Auto-generated method stub
 		boolean ok = false;	
-		if (!comprobarCriminal(criminal)) {
+		if (!comprobarCriminal(criminals)) {
 			this.openConnection();
 			try {
 // Preparamos la sentencia stmt con la conexion y sentencia sql correspondiente
 
 				stmt = con.prepareStatement(sqlInsert);
-				stmt.setString(1, criminal.getDni());
-			    stmt.setString(2, criminal.getCri_name());
-			    stmt.setString(3, criminal.getCri_surname());
-			    stmt.setInt(4, criminal.getAge());
-			    stmt.setString(5, criminal.getCri_decription());
-			    stmt.setString(6, criminal.getCrimes());
+				stmt.setString(1, criminals.getDni());
+				stmt.setString(2, criminals.getCri_name());
+				stmt.setString(3, criminals.getCri_surname());
+				stmt.setInt(4, criminals.getAge());
+				stmt.setString(5, criminals.getCri_decription());
+				stmt.setString(6, criminals.getCrimes());
 				if (stmt.executeUpdate() > 0) {
 					ok = true;
 				}
-
 				stmt.close();
 				con.close();
 			} catch (SQLException e) {
@@ -126,7 +126,7 @@ public class Implementacion {
 			}
 		}
 		return ok;
-
+		
 	}
 
 	public boolean actualizarUsuario(Users user) {
