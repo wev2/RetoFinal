@@ -39,7 +39,7 @@ public class VentanaVisualizar extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
-		comboBox = new JComboBox<String>();
+		comboBox = new JComboBox();
 		comboBox.setBackground(new Color(30, 144, 255));
 		comboBox.setBounds(154, 153, 142, 28);
 		cargarUsuarios();
@@ -56,7 +56,7 @@ public class VentanaVisualizar extends JDialog {
 		Cases = cont.consultarUsuarios();
 		if (!Cases.isEmpty()) {
 			for (Cases c : Cases.values()) {
-				comboBox.addItem(c.getName_c());
+				comboBox.addItem(c.getCode_cases());
 			}
 		}comboBox.setSelectedIndex(-1);
 	}

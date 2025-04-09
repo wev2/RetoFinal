@@ -14,6 +14,10 @@ public class Cases {
 		this.number_ag = number_ag;
 		this.number_cr = number_cr;
 	}
+
+	public Cases(String code_cases) {
+		this.code_cases = code_cases;
+	}
 	
 	public String getCode_cases() {
 		return code_cases;

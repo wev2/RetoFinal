@@ -20,7 +20,7 @@ public class Implementacion {
 	final String SQL = "SELECT * FROM users WHERE Nam_USERS = ? AND passwords = ?";
 	final String SQL_INSERT = "INSERT INTO users VALUES (?, ?, ?, ?, ?, ?)";
 	final String SQL_SELECT_BY_ID = "SELECT * FROM users WHERE ID = ?";
-	final String SQL_SELECT_ALL = "SELECT * FROM users";
+	final String SQL_SELECT_CODE = "SELECT COD_CASES FROM CASES";
 	final String SQL_DELETE = "DELETE FROM users WHERE Nam_USERS=?";
 	final String SQL_UPDATE = "UPDATE users SET passwords=? WHERE Nam_USERS=?";
 
@@ -118,18 +118,17 @@ public class Implementacion {
 		Map<String, Cases> usuarios = new TreeMap<>();
 		openConnection();
 		try {
-			stmt = con.prepareStatement(SQL_SELECT_ALL);
+			stmt = con.prepareStatement(SQL_SELECT_CODE);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
-				Cases cases = new Cases(rs.getString("name_c"), rs.getString("code_cases"), rs.getString("description"),
-						rs.getInt("number_ag"), rs.getInt("number_cr"));
-				usuarios.put(cases.getName_c(), cases);
+				Cases cases = new Cases(rs.getString("cod_cases"));
+				usuarios.put(cases.getCode_cases(), cases);
 			}
 			rs.close();
 			stmt.close();
 			con.close();
 		} catch (SQLException e) {
-			System.out.println("Error al consultar usuarios: " + e.getMessage());
+			System.out.println("Error al consultar casos: " + e.getMessage());
 		}
 		return usuarios;
 	}
