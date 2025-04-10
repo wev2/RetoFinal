@@ -129,7 +129,7 @@ public class InsertWindow extends JDialog implements ActionListener {
 		lblNewLabelFoto.setEnabled(false);
 		lblNewLabelFoto.setFont(new Font("Tahoma", Font.PLAIN, 5));
 		lblNewLabelFoto.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabelFoto.setIcon(new ImageIcon("C:\\Users\\koraw_54jmcxu\\eclipse-workspace\\RetoFinal\\Imagenes\\criminal.jpg"));
+		lblNewLabelFoto.setIcon(new ImageIcon("C:\\Users\\1dami\\eclipse-workspace\\RetoFinal\\Imagenes\\criminal.jpg"));
 		lblNewLabelFoto.setBounds(407, 56, 177, 177);
 		contentPanel.add(lblNewLabelFoto);
 

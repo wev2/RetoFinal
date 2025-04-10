@@ -118,7 +118,7 @@ public class Modify<TextDNIMOD> extends JDialog implements ActionListener {
 		contentPanel.add(TextNewCrimes);
 
 		JLabel Text_NewDNI_1 = new JLabel("");
-		Text_NewDNI_1.setIcon(new ImageIcon("C:\\Users\\koraw_54jmcxu\\eclipse-workspace\\RetoFinal\\Imagenes\\Modify V2.jpg"));
+		Text_NewDNI_1.setIcon(new ImageIcon("C:\\Users\\1dami\\eclipse-workspace\\RetoFinal\\Imagenes\\Modify V2.jpg"));
 		Text_NewDNI_1.setHorizontalAlignment(SwingConstants.CENTER);
 		Text_NewDNI_1.setForeground(Color.BLACK);
 		Text_NewDNI_1.setFont(new Font("Times New Roman", Font.BOLD, 16));
@@ -137,7 +137,7 @@ public class Modify<TextDNIMOD> extends JDialog implements ActionListener {
 		lblTopText.setBounds(88, 11, 328, 30);
 		contentPanel.add(lblTopText);
 			
-		JLabel TextDNIMOD = new JLabel();
+		TextDNIMOD = new JLabel();
 		TextDNIMOD.setHorizontalAlignment(SwingConstants.LEFT);
 		TextDNIMOD.setForeground(new Color(0, 255, 64));
 		TextDNIMOD.setFont(new Font("Times New Roman", Font.BOLD, 16));

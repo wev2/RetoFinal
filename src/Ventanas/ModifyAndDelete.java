@@ -56,18 +56,18 @@ public class ModifyAndDelete extends JDialog implements ActionListener {
 		}
 
 
-		btnDelete.setIcon(new ImageIcon("C:\\Users\\koraw_54jmcxu\\eclipse-workspace\\RetoFinal\\Imagenes\\Delete Criminal.png"));
+		btnDelete.setIcon(new ImageIcon("C:\\Users\\1dami\\eclipse-workspace\\RetoFinal\\Imagenes\\Delete Criminal.png"));
 		btnDelete.setBounds(457, 248, 93, 93);
 		contentPanel.add(btnDelete);
 		btnDelete.addActionListener(this);
 
-		btnModify.setIcon(new ImageIcon("C:\\Users\\koraw_54jmcxu\\eclipse-workspace\\RetoFinal\\Imagenes\\modificar.jpg"));
+		btnModify.setIcon(new ImageIcon("C:\\Users\\1dami\\eclipse-workspace\\RetoFinal\\Imagenes\\modificar.jpg"));
 		btnModify.setBounds(68, 248, 93, 93);
 		contentPanel.add(btnModify);
 		btnModify.addActionListener(this);
 
 		TextBackground2 = new JLabel("");
-		TextBackground2.setIcon(new ImageIcon("C:\\Users\\koraw_54jmcxu\\eclipse-workspace\\RetoFinal\\Imagenes\\EscudoV2.png"));
+		TextBackground2.setIcon(new ImageIcon("C:\\Users\\1dami\\eclipse-workspace\\RetoFinal\\Imagenes\\EscudoV2.png"));
 		TextBackground2.setHorizontalAlignment(SwingConstants.CENTER);
 		TextBackground2.setForeground(Color.BLACK);
 		TextBackground2.setFont(new Font("Times New Roman", Font.BOLD, 16));
@@ -78,7 +78,7 @@ public class ModifyAndDelete extends JDialog implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub		
 		if (e.getSource()==btnModify) {
 			cont = new LoginControlador();
 			if (txtDNI_Primario.getText().isEmpty() || txtDNI_Primario.getText().equals("DNI")) {
@@ -96,8 +96,8 @@ public class ModifyAndDelete extends JDialog implements ActionListener {
 					if (cont.comprobarCriminal(new Criminals (txtDNI_Primario.getText()))) {				
 						DNIGuardado = txtDNI_Primario.getText();
 						Modify v=new  Modify();
-						v.TextDNIMOD.setText(DNIGuardado);
 						v.setVisible(true);
+						v.TextDNIMOD.setText(DNIGuardado);
 					}else {
 						JOptionPane.showMessageDialog(ModifyAndDelete.this,
 								"The criminal does not exist",

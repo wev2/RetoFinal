@@ -35,7 +35,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 
 	public VentanaPrincipal(LoginControlador cont) {
 		this.cont = cont;
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\koraw_54jmcxu\\eclipse-workspace\\RetoFinal\\Imagenes\\iconoertzaina2.jpg"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\1dami\\eclipse-workspace\\RetoFinal\\Imagenes\\iconoertzaina2.jpg"));
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 608, 407);
@@ -74,7 +74,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		contentPane.add(lblNewLabel_1);
 
 
-		ImageIcon imagenFondo = new ImageIcon("C:\\Users\\koraw_54jmcxu\\eclipse-workspace\\RetoFinal\\Imagenes\\ertzaina.jpg");
+		ImageIcon imagenFondo = new ImageIcon("C:\\Users\\1dami\\eclipse-workspace\\RetoFinal\\Imagenes\\ertzaina.jpg");
 		//ruta de la imagen
 
 		labelFondo = new JLabel(imagenFondo);
