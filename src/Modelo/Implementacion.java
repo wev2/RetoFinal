@@ -1,6 +1,10 @@
 package Modelo;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.TreeMap;
@@ -19,13 +23,17 @@ public class Implementacion {
 	private String passwordBD;
 
 	// Sentencias SQL
-	final String SQL = "SELECT * FROM users WHERE Nam_USERS = ? AND passwords = ?";
-	final String SQL_INSERT = "INSERT INTO users VALUES (?, ?, ?, ?, ?, ?)";
-	final String SQL_SELECT_BY_ID = "SELECT * FROM users WHERE ID = ?";
-	final String SQL_SELECT_ALL = "SELECT * FROM users";
-	final String SQL_DELETE = "DELETE FROM users WHERE Nam_USERS=?";
-	final String SQL_UPDATE = "UPDATE users SET passwords=? WHERE Nam_USERS=?";
 
+	final String SQL = "SELECT * FROM users WHERE Nam_USERS = ? AND passwords = ?";
+	final String sql1 = "SELECT * FROM users WHERE ID = ?";
+	final String sql2 = "SELECT * FROM criminals WHERE DNI = ?";
+	final String sqlInsert = "INSERT INTO criminals VALUES 	(?,?,?,?,?,?)";
+	final String SQLCONSULTA = "SELECT * FROM users";
+	final String SQLBORRAR = "DELETE FROM criminals WHERE DNI=?";
+	final String SQLMODIFICAR = "UPDATE criminals SET NAME_CRIMINAL = ?, SURNAME_CRIMINAL = ?, EDAD = ?, DESCRIPTION_CRIMINAL = ?, CRIMES = ? WHERE DNI = ?";
+
+	// Para la conexi n utilizamos un fichero de configuaraci n, config que
+	// guardamos en el paquete control:
 	public Implementacion() {
 		this.configFile = ResourceBundle.getBundle("modelo.configClase");
 		this.driverBD = this.configFile.getString("Driver");
@@ -36,22 +44,28 @@ public class Implementacion {
 
 	private void openConnection() {
 		try {
-			con = DriverManager.getConnection(urlBD, userBD, passwordBD);
+			con = DriverManager.getConnection(urlBD, this.userBD, this.passwordBD);
 		} catch (SQLException e) {
 			System.out.println("Error al intentar abrir la BD");
+			e.printStackTrace();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	public boolean comprobarUsuario(Users user) {
+		// Abrimos la conexion
 		boolean existe = false;
-		openConnection();
+		this.openConnection();
 		try {
 			stmt = con.prepareStatement(SQL);
 			stmt.setString(1, user.getName_users());
 			stmt.setString(2, user.getPassword());
 			ResultSet resultado = stmt.executeQuery();
-			existe = resultado.next();
+			// Si hay un resultado, el usuario existe
+			if (resultado.next()) {
+				existe = true;
+			}
 			resultado.close();
 			stmt.close();
 			con.close();
@@ -79,8 +93,9 @@ public class Implementacion {
 			resultado.close();
 			stmt.close();
 			con.close();
+
 		} catch (SQLException e) {
-			System.out.println("Error al verificar criminal: " + e.getMessage());
+			System.out.println("Error al verificar credenciales: " + e.getMessage());
 		}
 
 		return yaexiste;
@@ -107,30 +122,36 @@ public class Implementacion {
 				stmt.close();
 				con.close();
 			} catch (SQLException e) {
-				System.out.println("Error al insertar criminal: " + e.getMessage());
+				System.out.println("Error al verificar credenciales: " + e.getMessage());
 			}
 		}
 		return ok;
+
 	}
 
 	public boolean actualizarUsuario(Users user) {
 		// TODO Auto-generated method stub
 		boolean ok = false;
-		openConnection();
+
+		this.openConnection();
 		try {
 			// Preparamos la sentencia stmt con la conexion y sentencia sql correspondiente
 
 			stmt = con.prepareStatement(SQLMODIFICAR);
 			stmt.setString(2, user.getName());
 			stmt.setString(1, user.getPassword());
-			stmt.setString(2, user.getName());
-			ok = stmt.executeUpdate() > 0;
+			if (stmt.executeUpdate() > 0) {
+				ok = true;
+			}
+
 			stmt.close();
 			con.close();
 		} catch (SQLException e) {
-			System.out.println("Error al actualizar usuario: " + e.getMessage());
+			System.out.println("Error al verificar credenciales: " + e.getMessage());
 		}
+
 		return ok;
+
 	}
 
 	public Map<String, Users> consultaUsuarios() {
@@ -150,16 +171,19 @@ public class Implementacion {
 
 			// Leemos de uno en uno
 			while (rs.next()) {
-				Users user = new Users(rs.getString("name_users"), rs.getString("password"));
-				usuarios.put(user.getName(), user);
+				user = new Users(SQL, SQL);
+				user.setName(rs.getString("nombre"));
+				user.setPassword(rs.getString("contrasena"));
+				equipos.put(user.getName(), user);
 			}
 			rs.close();
 			stmt.close();
 			con.close();
 		} catch (SQLException e) {
-			System.out.println("Error al consultar usuarios: " + e.getMessage());
+			System.out.println("Error de SQL");
+			e.printStackTrace();
 		}
-		return usuarios;
+		return equipos;
 	}
 
 	public boolean DeleteCriminal(Criminals criminals) {
